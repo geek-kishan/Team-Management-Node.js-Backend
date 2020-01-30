@@ -1,0 +1,106 @@
+Technologies used: Node.js, Express.js, Mongodb, Postman(client)
+Functionality: Basic validations, Token verification, Password encryption
+
+install all dependencied using: npm i
+run server: npm start
+
+1) Signup: Create new user entry in the database and provides json web token to the front-end
+2) Login: Can login using user details
+3) Create new task: User can create a new task and assign to users after login or signup
+4) Change password: User can change his/her password by providing valid old password and new password
+5) Assign task to more users: User can assign task created by him to different users by getting list of all available users
+6) Panding/completed: User can mark the task as completed or not.
+
+postman:
+1)signup:
+url: http://localhost:4001/auth/signup
+method: post
+headers: content-type : application/json
+body: row
+valid req. formate: {
+	"fname":"four",
+	"lname":"lastname",
+	"email":"four@mail.com",
+	"password": "a"
+}
+
+1)signup:
+url: http://localhost:4001/auth/signup
+method: post
+headers: content-type : application/json
+body: row
+valid req. formate: {
+	"fname":"four",
+	"lname":"lastname",
+	"email":"four@mail.com",
+	"password": "a"
+}
+
+2)login:
+url: http://localhost:4001/auth/login
+method: post
+headers: content-type : application/json
+body: row
+valid req. formate: {
+	"email":"four@mail.com",
+	"password": "a"
+}
+
+3)changepassword:
+url: http://localhost:4001/auth/changePassword
+method: put
+headers: content-type : application/json,
+         authorization: bearer token
+body: row
+valid req. formate: {
+	"newPass":"pqr",
+	"oldPass": "xyz"
+}
+
+4)create task:
+url: http://localhost:4001/user/newtask
+method: post
+headers: content-type : application/json
+         authorization: bearer token
+body: row
+valid req. formate: {
+	"name":"taskname",
+	"task":"Do something",
+	"members":["membersId"] (optional)
+}
+
+5)get all users:
+url: http://localhost:4001/user/allusers
+method: get
+headers: content-type : application/json
+         authorization: bearer token
+
+6)add members:
+url: http://localhost:4001/user/addmembers
+method: put
+headers: content-type : application/json
+         authorization: bearer token
+body: row
+valid req. formate: {
+	"taskId":"Id of the task",
+	"members":["membersId"]
+}
+
+7)change status:
+url: http://localhost:4001/user/taskstatus
+method: put
+headers: content-type : application/json
+         authorization: bearer token
+body: row
+valid req. formate: {
+	"taskId":"Id of the task",
+    "status": true/false
+}
+
+user can signup using basic information with empty mytask(assigned to him/her).
+any user can create new task and assign that task to the members.
+while creating or adding new members to the task those, all members will get the task in their mytask.
+all task create by specific user can be accessed using "createBy"
+all tasks assigned to specific user can be accessed using task's id from mytask.
+This project can be more optimized.(created in hurry)
+
